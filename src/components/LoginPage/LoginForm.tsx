@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -43,6 +43,7 @@ export default function LoginForm() {
         onChange={(e) => setPasswrord(e.target.value)}
         className="block w-full p-2 my-2 text-black"
       />
+      <button type="submit" className="bg-blue-500 p-2 rounded w-full">Login</button>
     </form>
   )
 };
