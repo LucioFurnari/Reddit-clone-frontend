@@ -2,9 +2,14 @@
 
 import Link from "next/link";
 import { useAuthStore } from "@/store/authStore";
+import { useEffect } from "react";
 
 export default function Navbar() {
-  const { user, logout } = useAuthStore();
+  const { user, logout, fetchUser } = useAuthStore();
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <nav className="flex justify-between items-center p-4 bg-gray-800 text-white">
