@@ -20,5 +20,12 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
   },
 
-  logout: () => set({ user: null}),
+  logout: async () => {
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/logout`, {}, { withCredentials: true });
+      set({ user: null });
+    } catch (error) {
+      console.error("Error en logout:", error);
+    }
+  },
 }));
