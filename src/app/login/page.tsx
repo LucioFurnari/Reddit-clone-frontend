@@ -4,7 +4,7 @@ import LoginForm from "@/components/LoginPage/LoginForm";
 
 export default function LoginPage() {
   return (
-    <main>
+    <main className="h-screen flex justify-center items-center bg-gray-900">
       <LoginForm />
     </main>
   )
