@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { loginSchema } from "./loginSchema";
+import ErrorText from "../common/ErrorText";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -36,35 +37,35 @@ export default function LoginForm() {
       await fetchUser();
       router.push("/");
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.data?.errors) {
-        setErrors({ email: error.response.data.errors.email, password: error.response.data.errors.password, server: error.response.data.errors.server  });
+      if (axios.isAxiosError(error) && error.response?.data?.error) {
+        setErrors({ email: error.response.data.error.email, password: error.response.data.error.password, server: error.response.data.error });
       }
     }
   };
 
   return (
-    <form className="p-6 bg-gray-800 text-white rounded-lg" onSubmit={handleLogin}>
-      <h2 className="text-2xl">Login</h2>
+    <form className="p-6 w-96 max-w-96  bg-gray-800 text-white rounded-lg" onSubmit={handleLogin}>
+      <h2 className="text-2xl pt-4 pb-4">Login</h2>
       <input
         type="email"
         name="email"
         placeholder="Username"
         value={formData.email}
         onChange={handleChange}
-        className="block w-full p-2 my-2 "
+        className="block w-full p-2 my-4 "
       />
-      {errors.email && <p className="text-red-500">{errors.email}</p>}
+      <ErrorText message={errors.email} />
       <input
         type="password"
         name="password"
         placeholder="Password"
         value={formData.password}
         onChange={handleChange}
-        className="block w-full p-2 my-2 "
+        className="block w-full p-2 my-4 "
       />
-      {errors.password && <p className="text-red-500">{errors.password}</p>}
-      {errors.server && <p className="text-red-500">{errors.server}</p>}
-      <button type="submit" className="bg-blue-500 p-2 rounded w-full">Login</button>
+      <ErrorText message={errors.password} />
+      <button type="submit" className="bg-blue-500 my-4 p-2 rounded w-full font-semibold">Login</button>
+      <ErrorText message={errors.server} />
     </form>
   )
 };
