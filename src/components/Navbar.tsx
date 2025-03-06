@@ -12,7 +12,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-gray-800 text-white">
+    <nav className="flex justify-around items-center p-4 bg-gray-800 text-white">
       <Link href="/">🏠 Reddit Clone </Link>
       {
         user ? (
@@ -21,7 +21,10 @@ export default function Navbar() {
             <button onClick={logout} className="ml-4 bg-red-500 px-3 py-1 rounded">Logout</button>
           </div>
         ) : (
-          <Link href="/login">Login</Link>
+          <>
+            <Link href="/login">Login</Link>
+            <Link href="/register">Register</Link>
+          </>
         )
       }
     </nav>
