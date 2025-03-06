@@ -52,7 +52,7 @@ export default function LoginForm() {
         placeholder="Username"
         value={formData.email}
         onChange={handleChange}
-        className="block w-full p-2 my-4 "
+        className="block w-full p-2 my-4"
       />
       <ErrorText message={errors.email} />
       <input
@@ -61,7 +61,7 @@ export default function LoginForm() {
         placeholder="Password"
         value={formData.password}
         onChange={handleChange}
-        className="block w-full p-2 my-4 "
+        className="block w-full p-2 my-4"
       />
       <ErrorText message={errors.password} />
       <button type="submit" className="bg-blue-500 my-4 p-2 rounded w-full font-semibold">Login</button>
