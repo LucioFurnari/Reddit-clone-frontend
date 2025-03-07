@@ -49,13 +49,14 @@ export default function SignupForm() {
   };
   };
   return (
-    <form onSubmit={handleSignup}>
+    <form className="p-6 w-96 max-w-96  bg-gray-800 text-white rounded-lg" onSubmit={handleSignup}>
+      <h2 className="text-2xl pt-4 pb-4">Signup</h2>
       <input
         name="email"
         type="email"
         placeholder="Email"
         value={formData.email}
-        onAbort={handleChange}
+        onChange={handleChange}
         className="block w-full p-2 my-4"
       />
       <ErrorText message={errors.email} />
@@ -68,6 +69,22 @@ export default function SignupForm() {
         className="block w-full p-2 my-4"
       />
       <ErrorText message={errors.username} />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleChange}
+        className="block w-full p-2 my-4" 
+      />
+      <input
+        name="confirmPassword"
+        type="password"
+        placeholder="Confirm Password"
+        value={formData.confirmPassword}
+        onChange={handleChange}
+        className="block w-full p-2 my-4"
+      />
       <button type="submit" className="bg-blue-500 my-4 p-2 rounded w-full font-semibold">Signup</button>
       <ErrorText message={errors.server} />
     </form>
