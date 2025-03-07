@@ -10,6 +10,7 @@ import axios from "axios";
 export default function SignupForm() {
   const [formData, setFormData] = useState({ email: "", username: "", password: "", confirmPassword: "" });
   const [errors, setErrors] = useState<{ email?: string, username?: string, password?: string, confirmPassword?: string, server?: string}>({});
+  const [successSignup, setSuccesSignup] = useState(false);
   const router = useRouter();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -19,6 +20,7 @@ export default function SignupForm() {
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
     setErrors({});
+    setSuccesSignup(false);
 
     const result = signupSchema.safeParse(formData);
     if (!result.success) {
@@ -42,7 +44,12 @@ export default function SignupForm() {
           password: formData.password
         },
       );
-      router.push("/login");
+
+      setSuccesSignup(true);
+      // Wait 2 seconds before redirecting
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.error) {
         console.log(error.response.data.error)
@@ -91,6 +98,7 @@ export default function SignupForm() {
       <ErrorText message={errors.confirmPassword} />
       <button type="submit" className="bg-blue-500 my-4 p-2 rounded w-full font-semibold">Signup</button>
       <ErrorText message={errors.server} />
+      {successSignup && <p className="text-gray-500 text-sm">✅ Registration successful! Redirecting to home...</p>}
     </form>
   )
 };
