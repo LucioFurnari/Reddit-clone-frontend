@@ -23,12 +23,14 @@ export default function SignupForm() {
     const result = signupSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors = result.error.flatten().fieldErrors;
+      console.log(fieldErrors)
       setErrors({ 
         email: fieldErrors.email?.[0],
         username: fieldErrors.username?.[0],
         password: fieldErrors.password?.[0],
         confirmPassword: fieldErrors.confirmPassword?.[0],
-      })
+      });
+      return;
     }
 
     try {
@@ -40,11 +42,11 @@ export default function SignupForm() {
           password: formData.password
         },
       );
-
       router.push("/login");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.error) {
-        setErrors({ email: error.response.data.error.email, username: error.response.data.error.username, password: error.response.data.error.password, confirmPassword: error.response.data.error.confirmPassword, server: error.response.data.error });
+        console.log(error.response.data.error)
+        setErrors({ email: error.response.data.error.email, username: error.response.data.error.username, password: error.response.data.error.password, server: error.response.data.error });
       }
   };
   };
@@ -77,6 +79,7 @@ export default function SignupForm() {
         onChange={handleChange}
         className="block w-full p-2 my-4" 
       />
+      <ErrorText message={errors.password} />
       <input
         name="confirmPassword"
         type="password"
@@ -85,6 +88,7 @@ export default function SignupForm() {
         onChange={handleChange}
         className="block w-full p-2 my-4"
       />
+      <ErrorText message={errors.confirmPassword} />
       <button type="submit" className="bg-blue-500 my-4 p-2 rounded w-full font-semibold">Signup</button>
       <ErrorText message={errors.server} />
     </form>
