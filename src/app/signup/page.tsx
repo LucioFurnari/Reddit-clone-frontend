@@ -1,9 +1,11 @@
 "use client"
 
+import SignupForm from "@/components/SignupPage/SignupForm"
+
 export default function SignupPage() {
   return (
-    <main>
-      <h1>Signup Page</h1>
+    <main className="h-screen flex justify-center items-center bg-gray-900">
+      <SignupForm />
     </main>
   )
 };
