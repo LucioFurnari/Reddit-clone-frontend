@@ -6,12 +6,14 @@ export function middleware(req: NextRequest) {
   const protectedRoutes = ["/home", "/profile", "/settings"];
 
   if (protectedRoutes.includes(req.nextUrl.pathname) && !token) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/", req.url));
   };
+
+
   
   return NextResponse.next();
 };
 
 export const config = {
-  matcher: ["/home", "/profile", "/settings"],
+  matcher: ["/","/home/:path*", "/profile", "/settings"],
 };
