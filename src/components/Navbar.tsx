@@ -18,13 +18,13 @@ export default function Navbar() {
         user ? (
           <div>
             <span>👤 {user.username}</span>
-            <button onClick={logout} className="ml-4 bg-red-500 px-3 py-1 rounded">Logout</button>
+            <button onClick={logout} className="ml-4 bg-red-500 px-3 py-1 rounded cursor-pointer hover:bg-red-400">Logout</button>
           </div>
         ) : (
-          <>
-            <Link href="/login">Login</Link>
-            <Link href="/register">Register</Link>
-          </>
+          <div>
+            <Link className="p-2 hover:bg-slate-500/50 rounded ml-2" href="/login">Login</Link>
+            <Link className="p-2 hover:bg-slate-500/50 rounded ml-2" href="/signup">Signup</Link>
+          </div>
         )
       }
     </nav>
