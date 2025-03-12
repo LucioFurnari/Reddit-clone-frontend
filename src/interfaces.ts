@@ -7,6 +7,13 @@ export interface PostInterface {
   authorId: string,
   subredditId: string,
   karma: number,
-  author: string,
-  subreddit: string
+  author: {
+    username: string,
+    id: string
+  },
+  subreddit: {
+    name: string,
+    id: string,
+    iconUrl?: string
+  }
 };
