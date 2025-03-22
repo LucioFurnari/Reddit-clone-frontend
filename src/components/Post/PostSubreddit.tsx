@@ -7,13 +7,13 @@ interface PostSubredditProps {
 
 export default function PostSubreddit({...props}: PostSubredditProps) {
   return (
-    <div>
+    <div className="mb-2 inline-block">
       {
         props.iconUrl ?
-        <Image src={props.iconUrl} alt={`r/${props.name}`}  /> :
+        <Image src={props.iconUrl} width={10} height={10} alt={`r/${props.name}`}  /> :
         <span>{props.name[0]}</span>
       }
-      <span className="ml-2">{props.name}</span>
+      <span className="ml-2 text-sm">r/{props.name}</span>
     </div> 
   )
 }
