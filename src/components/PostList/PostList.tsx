@@ -41,14 +41,15 @@ export default async function PostList() {
         cache: "no-store",
         credentials: "include"
       });
-      console.log(userRes.status)
+
       if (userRes.ok) {
         // 3️⃣ Fetch posts from user's subscribed subreddits
         const postsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/subscribed`, {
+          headers: { Cookie: `token=${token}` },
           cache: "no-store",
           credentials: "include"
         });
-        console.log(postsRes.status)
+
         if (!postsRes.ok) throw new Error("Failed to fetch posts");
 
         if (postsRes.ok) {
