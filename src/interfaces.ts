@@ -15,5 +15,8 @@ export interface PostInterface {
     name: string,
     id: string,
     iconUrl?: string
+  },
+  _count?: {
+    comments: number
   }
 };
