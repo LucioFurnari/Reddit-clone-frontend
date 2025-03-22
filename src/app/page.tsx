@@ -1,5 +1,4 @@
-import PostsList from "@/components/PostList/PostList";
-
+import PostList from "@/components/PostList/PostList";
 
 export default function Home() {
 
@@ -8,7 +7,7 @@ export default function Home() {
       <h1 className="text-4xl">Welcome to Reddit Clone</h1>
       <p className="text-lg">This is a Reddit clone built with Next.js and Tailwind CSS.</p>
       <div className="col-start-2 col-end-3">
-        <PostsList />
+        <PostList />
       </div>
     </main>
   );
