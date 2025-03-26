@@ -12,8 +12,8 @@ export async function fetchGeneralPosts() {
   
     const data: PostsListInterface = await res.json();
   
-    return { data, error: null };
+    return { posts: data.posts, error: null };
   } catch (error) {
-    return { data: [], error: error}
+    return { posts: [], error: error}
   }
 }
