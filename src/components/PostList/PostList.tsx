@@ -1,25 +1,16 @@
 import { PostInterface } from "@/interfaces";
-
+import { fetchGeneralPosts } from "@/services/postService";
 import Post from "../Post/Post";
 import { cookies } from "next/headers";
-
-interface PostsListInterface {
-  posts: PostInterface[] | []
-}
 
 export default async function PostList() {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value; 
 
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/subscribed`, {
-    //   cache: "no-store",
-    // });
-    if (!token) {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`, {
-        cache: "no-store",
-      });
-      const data: PostsListInterface = await res.json();
+    const data = await fetchGeneralPosts();
+
+    if(!token) {
       return (
         <section>
         {
@@ -32,17 +23,17 @@ export default async function PostList() {
         }
         </section>
       )
-    };
+    }
 
     if (token) {
       // 2️⃣ Fetch user data using the token
-      const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
-        headers: { Cookie: `token=${token}` },
-        cache: "no-store",
-        credentials: "include"
-      });
+      // const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
+      //   headers: { Cookie: `token=${token}` },
+      //   cache: "no-store",
+      //   credentials: "include"
+      // });
 
-      if (userRes.ok) {
+
         // 3️⃣ Fetch posts from user's subscribed subreddits
         const postsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/subscribed`, {
           headers: { Cookie: `token=${token}` },
@@ -67,24 +58,6 @@ export default async function PostList() {
             </section>
           )
         }
-      } else {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`, {
-        cache: "no-store",
-      });
-      const data: PostsListInterface = await res.json();
-      return (
-        <section>
-        {
-          data.posts.length > 0 ?
-          (
-            data.posts.map((post: PostInterface) => <Post key={post.id} post={post} />)
-          ) : (
-            <p>There are no posts at the moment</p>
-          )
-        }
-        </section>
-      )
-      };
     };
 
     // const data: PostsListInterface = await res.json()
