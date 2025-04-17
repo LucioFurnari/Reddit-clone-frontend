@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useAuthStore } from "@/store/authStore";
 import { useEffect } from "react";
+import LogoutButton from "./LogoutButton";
 
 export default function Navbar() {
-  const { user, logout, fetchUser } = useAuthStore();
+  const { user, fetchUser } = useAuthStore();
 
   useEffect(() => {
     fetchUser();
@@ -18,7 +19,7 @@ export default function Navbar() {
         user ? (
           <div>
             <span>👤 {user.username}</span>
-            <button onClick={logout} className="ml-4 bg-red-500 px-3 py-1 rounded cursor-pointer hover:bg-red-400">Logout</button>
+            <LogoutButton />
           </div>
         ) : (
           <div>
